@@ -40,9 +40,9 @@ To perform a study on Socket Programming
 
 ## Client –Server Operations
 
-Clients create a socket using socket() and connect to a server using connect().
-After establishing a connection, clients can send and receive data using send() and recv().
-
+ Clients create a socket using socket() and connect to a server using connect().
+ After establishing a connection, clients can send and receive data using send() and recv().
+ 
 ## Use Cases of Socket Programming:
 Socket programming finds applications in various domains, including web development, file transfer protocols, online gaming, and real-time communication. It is the foundation for protocols like HTTP, FTP, and SMTP, which power the internet. Socket programming enables the development of both server and client applications, facilitating the exchange of information between devices in a networked environment.
 ## Example Use Cases:
@@ -53,6 +53,49 @@ Socket programming finds applications in various domains, including web developm
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
 
+#CLIENTS:
+  import socket
+
+ Create a socket object
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ Connect to the server
+client_socket.connect(('localhost', 8000))
+Print the client's socket name
+print(f"Client connected from: {client_socket.getsockname()}")
+Receive a message from the server
+server_message = client_socket.recv(1024).decode()
+print(f"Received from server: {server_message}")
+Send a message to the server
+client_socket.send("Acknowledgement received from the client.".encode())
+ Close the connection
+client_socket.close()
+#SEVER:
+import socket
+# Create a socket object
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# Bind the socket to the host and port
+server_socket.bind(('localhost', 8000))
+# Listen for incoming connections (max 1 connection)
+server_socket.listen(1)
+print("Server is waiting for a connection...")
+# Accept the connection
+conn, addr = server_socket.accept()
+print(f"Connected by {addr}")
+# Send a message to the client
+conn.send("Hello from the server!".encode())
+# Receive a message from the client
+data = conn.recv(1024)
+print(f"Received from client: {data.decode()}")
+# Close the connection
+conn.close()
+server_socket.close()
+#OUTPUT:
+
+#CLIENTS:
+<img width="707" height="202" alt="017a5300-51e3-40ef-8f6e-4a7fd236a88d" src="https://github.com/user-attachments/assets/f04fd036-abef-4012-b66d-2bdaf22bd9ac" />
+
+#SERVER;
+<img width="720" height="225" alt="b7d457ba-8f9c-43c3-84c7-1b7f6eecd1b0" src="https://github.com/user-attachments/assets/857d9b81-3e11-472d-b3a9-5d31d9e60b60" />
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
